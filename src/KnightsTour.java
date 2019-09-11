@@ -6,22 +6,14 @@ import java.util.Arrays;
 public class KnightsTour{
 	
 
-	static int N = 5;
+	static int N = 8;
 	static int[][] sol = new int[N][N];
 	
 	static boolean isSafe(int x, int y, int sol[][]) {
 		if(x >= 0 && x < N && y >= 0 && y < N) {
 			if(sol[x][y] == -1) {
-				//System.out.printf("o index do sol[%d][%d] era -1 (debugging) %d\n", x, y, sol[x][y]);
-				//System.out.println("é seguro confia");
 				return true;
 			}
-		}
-		if(x > 0 && x < N && y > 0 && y < N) {
-			//System.out.printf("ixe nao coube no x %d y %d e o sol[%d][%d] é %d\n", x, y, x, y, sol[x][y]);
-		}
-		else {
-			//System.out.printf("ixe nao coube no x %d y %d, index invalido\n", x, y);
 		}
 		return false;
 	}
@@ -35,16 +27,6 @@ public class KnightsTour{
 			}
 		}
 		
-		/*
-		for(int i = 0; i < sol.length; i++) {
-			for(int j = 0; j < sol[i].length; j++) {
-				gridPane.add(zero, i, j, 1, 1);
-			}
-		}
-		
-		Scene scene = new Scene(gridPane, 240, 100);
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
 	}
 	
 	
@@ -77,7 +59,6 @@ public class KnightsTour{
 		
 		int xAtual = x;
 		int yAtual = y;
-		//System.out.println(numMove);
 		if(numMove == N * N) {
 			return true;
 		}
@@ -85,9 +66,7 @@ public class KnightsTour{
 		for(int i = 0; i < 8; i++) {
 			xAtual += moveX[i];
 			yAtual += moveY[i];
-			//printSolution(sol);	
 			if(isSafe(xAtual, yAtual, sol)) {
-				//System.out.println("cheguei no if");
 				sol[xAtual][yAtual] = numMove;
 				System.out.print("\033[0;0H");
 				printSolution(sol);
@@ -96,7 +75,6 @@ public class KnightsTour{
 			}else {
 				xAtual = x;
 				yAtual = y;
-				//sol[xAtual][yAtual] = -1;
 				continue;
 			}
 		}
@@ -109,18 +87,14 @@ public class KnightsTour{
 	
 	public static void main(String[] args) {
 
-
-
 		long start = System.currentTimeMillis();
-		/*initializeBoard(sol);
-		printSolution(sol);*/
+
 		backtracking(sol);
 		
-
-
 		long end = System.currentTimeMillis();
 
 		NumberFormat formatter = new DecimalFormat("#0.00000");
+		
 		System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
 	}
 	
